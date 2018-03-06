@@ -21,19 +21,20 @@ public class GoyouSourceServiceImpl implements GoyouSourceService {
 	@Override
 	public GoyouSource addGoyouSource(GoyouSource goyouSource) {
 		// TODO Auto-generated method stub
-		return null;
+		return goyouSourceRepository.save(goyouSource);
 	}
 
 	@Override
 	public GoyouSource updateGoyouSource(GoyouSource goyouSource) {
 		// TODO Auto-generated method stub
-		return null;
+		return goyouSourceRepository.save(goyouSource);
 	}
 
 	@Override
 	public GoyouSource findGoyouSourceById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return  goyouSourceRepository.findById(id);
+
 	}
 
 	@Override

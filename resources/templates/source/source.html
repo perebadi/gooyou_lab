@@ -31,7 +31,6 @@
                 
                  <!-- PAGE CONTENT WRAPPER -->
                 <div class="page-content-wrap">
-                		<form class="form-horizontal" action="#" th:action="@{/projects/project/rag/save/}" th:object="${formRagModel}" method="POST">
                     	
                     <div class="row">
                         <div class="col-md-12">
@@ -39,7 +38,56 @@
                         			
 	                            
 	                            <div class="col-md-12">
+	                            
+	                            
+	                            
+	                            
+	                            
+	                            								<div class="panel panel-default">
+																<div class="panel-heading">
+																	<h3 class="panel-title">Contacto de la Captación</h3>
+																	 <ul class="panel-controls">
+								                                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+								                                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+								                                        
+								                                        <li><a href="#" data-toggle="modal" name="addContact" data-target="#addContact" th:attr="data-customer=${customerid}"><span class="fa fa-plus-square"></span></a></li>
+								                                    </ul> 
+																</div>
+																
+																<div class="panel-body">
+																	<table class="table datatable" id="tablecontact" name="tablecontact">
+																		<thead>
+																			<tr>
+																				<th style="text-align: center;">Nombre</th>
+																				<th style="text-align: center;">Móvil</th>
+																				<th style="text-align: center;">Fijo</th>
+																				<th style="text-align: center;">Email</th>
+																				<th style="text-align: center;">Acción</th>
+																		
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr th:each="contact : ${contacts}">
+																				<td th:text="${contact.contactname}" align="center"></td>
+																				<td th:text="${contact.mobilephone}" align="center"></td>
+																				<td th:text="${contact.landphone}" align="center"></td>
+																				<td th:text="${contact.email}" align="center"></td>
+																				<td align="center">
+																					<a href="#" >
+																						<button  type="button" class="btn btn-primary dateChanger" th:attr="data-contactid=${contact.id}, data-contactname=${contact.contactname}"><span class="fa fa-check-square-o" aria-hidden="true"></span>Seleccionar</button>
+																					</a>
+																				</td>
+																				
+																				
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+															
 				                    	<div class="panel panel-default">
+				                    		<form name="formsource" id="formsource" role="form"	class="form-horizontal" th:action="@{/crm/customer/savesource}" th:object="${goyouSourceModel}" method="POST">
+				                    		
 			                                <div class="panel-heading">
 			                                    <h3 class="panel-title">Alta captación</h3>
 			                                    <ul class="panel-controls">
@@ -48,25 +96,34 @@
 			                                </div>
 			                                <div class="panel-body">
 			                                		<div class="row">
-			                                		
-			                                		
 			                                		<div class="col-md-12">
 						                            <!-- START DEFAULT FORM ELEMENTS -->
 						                            <div class="block">
-						                           						                                
-						                                <form class="form-horizontal" role="form"> 
-						                                
-						                                		<div class="form-group col-md-12">
+						                            		<input type="hidden" name="id" id="id"  value="0" />
+						                                	<input type="hidden" name="contact" id="contact" />
+						                                	<input type="hidden" name="customer" id="customer"  th:value="${customerid}"/>
+						                                	
+						                                	<div class="form-group col-md-12" >
+						                                        <label class="col-md-2 control-label">Contacto Captación</label>
+						                                       <div class="col-md-10" id="nombrecontacto" name="nombrecontacto">
+						                                        		<input  class="form-control" type="text" id="contactname" name="contactname"/>
+						                                        <label th:if="${#fields.hasErrors('contact')}"  class="text-danger help-block">No ha seleccionado ningun contacto</label>
+						                                        </div>
+						                                  </div>
+						                                	
+						                                	<div class="form-group col-md-12">
 						                                        <label class="col-md-2 control-label">Fecha Captación</label>
 						                                        <div class="col-md-3">
-						                                            <input class="form-control datepicker" value="2018-08-04" type="text" />
+						                                            <input class="form-control datepicker" type="text" th:field="*{datesource}"/>
+<!-- 						                                        		<label th:if="${#fields.hasErrors('datesource')}" th:errors="*{datesource}" class="text-danger help-block">La fecha debe cumplimentarse</label> -->
+						                                       		<label th:if="${#fields.hasErrors('datesource')}"  class="text-danger help-block">La fecha debe cumplimentarse</label>
+						                                       
 						                                        </div>
 						                                    </div>
-						                                    
-						                                    <div class="form-group col-md-12">
+						                                 <div class="form-group col-md-12">
 						                                        <label class="col-md-2 control-label">Status</label>
 						                                        <div class="col-md-3">                                        
-						                                            <select class="form-control select">
+						                                            <select class="form-control select" name="status" id="status">
 						                                                <option>Pendent</option>
 						                                                <option>En tramite</option>
 						                                                <option>Canccelado</option>
@@ -76,75 +133,52 @@
 						                                        
 						                                        <label class="col-md-2 control-label">Origen Oferta</label>
 						                                        <div class="col-md-3">                                                                                
-						                                            <select multiple="" class="form-control select">
-						                                                <option>Option 1</option>
-						                                                <option>Option 2</option>
-						                                                <option>Option 3</option>
-						                                                <option>Option 4</option>
-						                                                <option>Option 5</option>
+						                                            <select multiple="true" class="form-control select" name="sites" id="sites">
+						                                                <option value="LinkedIn">LinkedIn</option>
+						                                                <option value="Job and Talent">Job and Talent</option>
+						                                                <option value="Domestika">Domestika</option>
+						                                                <option value="Otros">Otros</option>
 						                                            </select>   
 						                                        </div>
+						                                        
+																
                                     							</div>
-                                    							
-                                    							
-						                                    
-                                                                       
-						                                    <div class="form-group col-md-12">
-						                                        <label class="col-md-1 control-label">Text</label>
-						                                        <div class="col-md-5">
-						                                            <input class="form-control" value="Some text value..." type="text" />
-						                                        </div>
-						                                    </div>
-						                                                                                            
-						                                    <div class="form-group col-md-12">
-						                                        <label class="col-md-1 control-label">Text area</label>
-						                                        <div class="col-md-5">
-						                                            <textarea class="form-control" rows="5"></textarea>
-						                                        </div>
-						                                    </div>
-						                                    <div class="form-group">
-						                                        <label class="col-md-2 control-label">Label</label>
+             						                     <div class="form-group col-md-12">
+						                                        <label class="col-md-2 control-label">Título Oferta</label>
 						                                        <div class="col-md-10">
-						                                            <p class="form-control-static">Static form control</p>
+						                                            <input class="form-control" type="text"  th:field="*{summary}"/>
+						                                            <label th:if="${#fields.hasErrors('summary')}" class="text-danger help-block" > El título es demasiado corto, debe ser mayor de 10 carácteres</label>
+						                                            
 						                                        </div>
-						                                    </div>                                    
-						                                </form>
+						                                    </div>
+						                                 <div class="form-group col-md-12">
+						                                        <label class="col-md-2 control-label">Job description</label>
+						                                        <div class="col-md-10">
+						                                            <textarea class="form-control" rows="5" th:field="*{jobdescription}"></textarea>
+						                                            <label th:if="${#fields.hasErrors('jobdescription')}"  class="text-danger help-block" > Error el campo Job Description no puede ser vacio</label>
+						                                            
+						                                        </div>
+						                                    </div>
+						                                                 
 						                            </div>
 						                            <!-- END DEFAULT FORM ELEMENTS -->
-						
-						                          
 						                        </div>
-			                                		
-			                                    
-			                                    
-			                                 	</div> <!--  END ROW -->                        
+			                                 	</div> <!--  END ROW -->     
 			                                </div><!--  END PANEL BODY -->
 			                                
 			                                
 											<div class="panel-footer">
 			                                    <button class="btn btn-default">Clear Form</button>                                    
 			                                    <button class="btn btn-primary pull-right">Submit</button>
-			                                </div>			                                
-			                                
+			                                </div>	
+			                               	                                
+			                                </form>	
 			                            </div>
-			                    </div>
-
-                            
-                            
-                            
-                            
-									
-									
-								
-					
-                            
-                            
+			                             
+			                    </div>                            
                         </div>
                     </div>                    
-                    
-                 </form>
                 </div>
-               
                 <!-- END PAGE CONTENT WRAPPER -->                       
             </div>            
             <!-- END PAGE CONTENT -->
@@ -176,47 +210,173 @@
 
  	<footer th:replace="layout/layout :: footer"></footer>
  	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- USER EDIT FORM -->
+ 	<!-- MODALS -->   
+ 		<div class="modal fade bd-example-modal-lg" id="addContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="taskEditModalHead">Edit Task</h4>
+                    </div>
+                    <div class="modal-body">
+                    		<div class="row">
+                    
+                        <div class="form-group col-md-12">
+						        <label class="col-md-2 control-label">Nombre Contacto</label>
+						        <div class="col-md-10">
+									<input id="contactnamemodal" name="contactnamemodal" type="text" class="form-control" />
+						        </div>
+						    </div>
+						    
+						    <div class="form-group col-md-12">
+						        <label class="col-md-2 control-label">Posición</label>
+						        <div class="col-md-10">
+									<input id="position" name="position" type="text" class="form-control" />
+						        </div>
+						    </div>
+						    
+						    <div class="form-group col-md-12">
+						        <label class="col-md-2 control-label">Email</label>
+						        <div class="col-md-10">
+									<input id="email" name="email" type="text" class="form-control" />
+						        </div>
+						    </div>
+						    
+						    <div class="form-group col-md-12">
+						        <label class="col-md-2 control-label">Tlf. Fijo</label>
+						        <div class="col-md-4">
+									<input id="landphone" name="landphone" type="text" class="form-control" />
+						        </div>
+						        
+						         <label class="col-md-2 control-label">Tlf. Móvil</label>
+						        <div class="col-md-4">
+									<input id="mobilephone" name="mobilephone" type="text" class="form-control" />
+						        </div>
+						    </div>
+
+					</div>
+
+                        
+                    </div>
+                    <div class="modal-footer">                        
+                        <button type="button" class="btn btn-primary" id="addcontactajax" name="addcontactajax">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <!-- END MODALS -->
+	<!-- END USER EDIT FORM -->
+ 	
+ 	
+ 	
  	<!-- THIS PAGE PLUGINS -->
+ 	
+ 	
+ 	 <!-- START PLUGINS -->
+          		<script th:src="@{/js/plugins/jquery/jquery.min.js}"></script>
+         		<script th:src="@{/js/plugins/jquery/jquery-ui.min.js}"></script>
+         		<script th:src="@{/js/plugins/bootstrap/bootstrap.min.js}"></script>
+        
  	        	<script th:src="@{/js/plugins/icheck/icheck.min.js}"></script>	
  	        	<script th:src="@{/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js}"></script>
+ 	        	
  	        	
  	       	<script th:src="@{/js/plugins/bootstrap/bootstrap-datepicker.js}"></script>	
  	        	<script th:src="@{/js/plugins/bootstrap/bootstrap-timepicker.min.js}"></script>	
  	        	<script th:src="@{/js/plugins/bootstrap/bootstrap-colorpicker.js}"></script>	
  	        	<script th:src="@{/js/plugins/bootstrap/bootstrap-file-input.js}"></script>	
  	        	<script th:src="@{/js/plugins/bootstrap/bootstrap-select.js}"></script>	
- 	        	<script th:src="@{/js/plugins/tagsinput/jquery.tagsinput.min.js}"></script>	
+ 	        	<script th:src="@{/js/plugins/tagsinput/jquery.tagsinput.min.js}"></script>
+ 	        	
+ 	        	<script th:src="@{/js/plugins/datatables/jquery.dataTables.min.js}"></script>	
+ 	        	
+ 	        	
+
  	        	
 
        
         <!-- END THIS PAGE PLUGINS -->       
         
         <!-- START TEMPLATE -->
- 	        	<script th:src="@{/js/settings.js}"></script>	
-        <!-- END TEMPLATE -->
+<!--  	        	<script th:src="@{/js/settings.js}"></script>	
+ -->        <!-- END TEMPLATE -->
         
         <script type="text/javascript">
-        document.getElementsByName("res")[0].addEventListener('click', res);
-        document.getElementsByName("nando")[0].addEventListener('click', nando);
-        document.getElementsByName("rag")[0].addEventListener('click', rag);
-        
-        function rag(){
-            alert("rag")
-        }
+       
+	        $(".dateChanger").click(function () {
+	            var contactid = $(this).attr("data-contactid");
+	            var contactname = $(this).attr("data-contactname");
 
-        function res(){
-            alert("res")
-        }
-        
-        
-        function nando(){
-            alert("nando")
-        }
-        
+	            $("#contactname").val(contactname);
+	            $("#contact").val(contactid);
 
-	      
-	          
-	        
-	    </script>
+	        });
+	       
+    		</script>
+    		
+    		
+    		<script type="text/javascript">        		
+        		//Asigna un nuevo usuario a un proyecto
+        		$('#addcontactajax').click(function(e) {
+        			e.preventDefault();
+        			ajaxPost();
+        		});
+
+        		function ajaxPost() {
+        			// PREPARE FORM DATA
+        			var formData = {
+        				contactname : $("#contactnamemodal").val(),
+        				position : $("#position").val(),
+        				email : $("#email").val(),
+        				landphone : $("#landphone").val(),
+        				mobilephone : $("#mobilephone").val(),
+        				customerid : $("#customer").val(),
+        			}
+
+        			var token = document.getElementsByName("_csrf")[0].value;
+
+        			// DO POST
+        			$.ajax({
+        				type : "POST",
+        				contentType : "application/json",
+        				url : "/api/addcontact/",
+        				data : JSON.stringify(formData),
+        				dataType : 'json',
+        				beforeSend : function(request) {
+        					return request.setRequestHeader('X-CSRF-Token', token);
+        				},
+
+        				success : function(result) {
+        					if (result.status == "Done") {
+        						
+        						var str_array = result.data.split(',');
+        						
+        						$("#tablecontact").load("/crm/refreshTableContact");
+        						$("#contactname").val(str_array[1]);
+        						$("#contact").val(str_array[0]);
+
+        						
+        						
+        					} else if (result.status == "Error") {
+        						
+        					}
+
+        				},
+        				error : function(e) {
+
+        				}
+        			});
+        		}
+        		
+        		
+        </script>
+	
     </body>
 </html>

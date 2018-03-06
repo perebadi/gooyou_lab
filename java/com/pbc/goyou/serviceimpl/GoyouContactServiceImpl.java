@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.pbc.goyou.entity.GoyouContact;
+import com.pbc.goyou.entity.GoyouCustomer;
 import com.pbc.goyou.repository.GoyouContactRepository;
 import com.pbc.goyou.service.GoyouContactService;
 
@@ -21,19 +22,19 @@ public class GoyouContactServiceImpl implements GoyouContactService {
 	@Override
 	public GoyouContact addGoyouContact(GoyouContact goyouContact) {
 		// TODO Auto-generated method stub
-		return null;
+		return goyouContactRepository.save(goyouContact);
 	}
 
 	@Override
 	public GoyouContact updateGoyouContact(GoyouContact goyouContact) {
 		// TODO Auto-generated method stub
-		return null;
+		return goyouContactRepository.save(goyouContact);
 	}
 
 	@Override
 	public GoyouContact findGoyouContactById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return goyouContactRepository.findById(id);
 	}
 
 	@Override
@@ -52,6 +53,14 @@ public class GoyouContactServiceImpl implements GoyouContactService {
 	public int countRecords() {
 		// TODO Auto-generated method stub
 		return (int) goyouContactRepository.count();
+	}
+
+	@Override
+	public List<GoyouContact> listContactByUser(GoyouCustomer customer) {
+		// TODO Auto-generated method stub
+		System.out.println(customer.getCustomername());
+		
+		return goyouContactRepository.findByCustomer(customer);
 	}
 
 }

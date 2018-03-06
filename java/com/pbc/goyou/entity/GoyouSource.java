@@ -2,6 +2,7 @@ package com.pbc.goyou.entity;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -35,7 +36,7 @@ public class GoyouSource {
 
 	@Column(name = "jobdescription")
 	@Lob
-	private Blob jobdescription;
+	private String jobdescription;
 
 	@Column(name = "datesource")
 	@Temporal(TemporalType.DATE)
@@ -56,7 +57,11 @@ public class GoyouSource {
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "source")
 	private Set<GoyouToDo> todos = new HashSet<GoyouToDo>();
-
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "source")
+	private Set<GoyouSites> sites = new HashSet<GoyouSites>();
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -73,13 +78,6 @@ public class GoyouSource {
 		this.summary = summary;
 	}
 
-	public Blob getJobdescription() {
-		return jobdescription;
-	}
-
-	public void setJobdescription(Blob jobdescription) {
-		this.jobdescription = jobdescription;
-	}
 
 	public Date getDatesource() {
 		return datesource;
@@ -120,13 +118,46 @@ public class GoyouSource {
 	public void setComments(Set<GoyouSourceComment> comments) {
 		this.comments = comments;
 	}
+	
+	
+	
+	
+
+
+
+	public Set<GoyouToDo> getTodos() {
+		return todos;
+	}
+
+	public void setTodos(Set<GoyouToDo> todos) {
+		this.todos = todos;
+	}
+
+	public Set<GoyouSites> getSites() {
+		return sites;
+	}
+
+	public void setSites(Set<GoyouSites> sites) {
+		this.sites = sites;
+	}
+	
+	
+
+	public String getJobdescription() {
+		return jobdescription;
+	}
+
+	public void setJobdescription(String jobdescription) {
+		this.jobdescription = jobdescription;
+	}
 
 	public GoyouSource() {
 
 	}
 
-	public GoyouSource(int id, String summary, Blob jobdescription, Date datesource, String status,
-			GoyouCustomer customer, GoyouContact contact, Set<GoyouSourceComment> comments) {
+	public GoyouSource(int id, String summary, String jobdescription, Date datesource, String status,
+			GoyouCustomer customer, GoyouContact contact, Set<GoyouSourceComment> comments, Set<GoyouToDo> todos,
+			Set<GoyouSites> sites) {
 		super();
 		this.id = id;
 		this.summary = summary;
@@ -136,6 +167,14 @@ public class GoyouSource {
 		this.customer = customer;
 		this.contact = contact;
 		this.comments = comments;
+		this.todos = todos;
+		this.sites = sites;
 	}
+	
+	
+	
+	
+	
 
+	
 }

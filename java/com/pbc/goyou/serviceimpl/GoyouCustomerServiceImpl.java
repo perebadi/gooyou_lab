@@ -36,8 +36,7 @@ public class GoyouCustomerServiceImpl implements GoyouCustomerService {
 
 	@Override
 	public GoyouCustomer findGoyouCustomerById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return goyouCustomerRepository.findById(id);
 	}
 
 	@Override

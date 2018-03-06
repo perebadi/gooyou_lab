@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.pbc.goyou.entity.GoyouContact;
+import com.pbc.goyou.entity.GoyouCustomer;
 import com.pbc.goyou.entity.User;
 
 
@@ -16,6 +17,10 @@ import com.pbc.goyou.entity.User;
 public interface GoyouContactRepository  extends JpaRepository<GoyouContact, Serializable> {
 		public abstract GoyouContact findById(int id);
 		public abstract List<GoyouContact> findAll();
+		public abstract List<GoyouContact> findByCustomer(GoyouCustomer customer);
+
 		public Page<GoyouContact> findAllByOrderByIdDesc( Pageable pageable);
+		
+		
 
 }
