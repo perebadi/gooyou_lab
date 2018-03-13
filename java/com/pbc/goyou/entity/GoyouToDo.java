@@ -47,6 +47,9 @@ public class GoyouToDo {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	private GoyouSource source;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private GoyouStatus goyouStatus;
 
 
 	

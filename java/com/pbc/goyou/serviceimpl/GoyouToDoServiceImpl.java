@@ -20,13 +20,13 @@ public class GoyouToDoServiceImpl implements GoyouToDoService {
 	@Override
 	public GoyouToDo addGoyouToDo(GoyouToDo goyouToDo) {
 		// TODO Auto-generated method stub
-		return null;
+		return goyouToDoRepository.save(goyouToDo);
 	}
 
 	@Override
 	public GoyouToDo updateGoyouToDo(GoyouToDo goyouToDo) {
 		// TODO Auto-generated method stub
-		return null;
+		return goyouToDoRepository.save(goyouToDo);
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class GoyouToDoServiceImpl implements GoyouToDoService {
 
 	@Override
 	public List<GoyouToDo> listPageableGoyouToDo(int pageno) {
-		// TODO Auto-generated method stub
 		return null;
+
 	}
 
 	@Override

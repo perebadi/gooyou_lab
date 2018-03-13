@@ -28,6 +28,7 @@ import com.pbc.goyou.constant.ViewConstant;
 import com.pbc.goyou.entity.GoyouCustomer;
 import com.pbc.goyou.entity.GoyouSites;
 import com.pbc.goyou.entity.GoyouSource;
+import com.pbc.goyou.entity.GoyouToDo;
 import com.pbc.goyou.model.GoyouSourceModel;
 import com.pbc.goyou.service.GoyouContactService;
 import com.pbc.goyou.service.GoyouCustomerService;
@@ -127,10 +128,8 @@ public class CrmController {
 	
 		
 		
-			System.out.println(goyouSourceModel.getSites());
+	   System.out.println(goyouSourceModel.getSites());
 			
-		
-		
 		
 		ModelAndView mav = new ModelAndView(ViewConstant.ADDSOURCE);
 		
@@ -182,6 +181,9 @@ public class CrmController {
 				}
 			}
 		}
+		
+		
+	
 		
 		
 		mav = new ModelAndView(ViewConstant.CUSTOMERS);
